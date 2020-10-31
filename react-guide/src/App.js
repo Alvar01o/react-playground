@@ -1,14 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-
+import React from 'react';
+import Person  from './Person/Person.js'
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Person />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -20,6 +19,7 @@ function App() {
       </header>
     </div>
   );
+//return React.createElement('div',{className:"App"}, React.createElement('h1',null,'Learn React'))
 }
 
 export default App;
