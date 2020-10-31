@@ -2,14 +2,24 @@ import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import Person  from './Person/Person.js'
+
+
+
 function App() {
+
+  const persons =  [
+    { name: 'Max', age: 28 },
+    { name: 'Alvaro', age: 29 },
+    { name: 'Stephanie', age: 26 }
+  ]
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Person name="Max" age="28"/>
-        <Person name="Alvaro" age="29">My hobbies : Programming </Person>
-        <Person name="Stephanie" age="26"/>
+        <Person name={persons[0].name} age={persons[0].age} />
+        <Person name={persons[1].name} age={persons[1].age} >My hobbies : Programming </Person>
+        <Person name={persons[2].name} age={persons[2].age} />
         <a
           className="App-link"
           href="https://reactjs.org"
