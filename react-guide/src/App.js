@@ -16,7 +16,13 @@ const [ personsState , setPersonsState ] = useState({
 })
 
   const switchNameHandler = () => {
-    console.log("Click")
+    setPersonsState({
+      persons: [
+        { name: 'Maximo', age: 23 },
+        { name: 'Alvaro', age: 22 },
+        { name: 'Stephanie', age: 21 }
+      ]
+    })
   }
 
   return (
