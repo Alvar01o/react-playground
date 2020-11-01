@@ -24,14 +24,23 @@ const [ personsState , setPersonsState ] = useState({
       ]
     })
   }
+  const nameChangeHandler = (event) => {
+    setPersonsState({
+      persons: [
+        { name: event.target.value, age: 23 },
+        { name: 'Alvaro', age: 22 },
+        { name: 'Stephanie', age: 21 }
+      ]
+    })
+  }
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
-        <Person name={personsState.persons[1].name} age={personsState.persons[1].age} >My hobbies : Programming </Person>
-        <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
+        <Person name={personsState.persons[0].name} age={personsState.persons[0].age} changed={nameChangeHandler}/>
+        <Person name={personsState.persons[1].name} age={personsState.persons[1].age} >My hobbies : Programming </Person> 
+        <Person name={personsState.persons[2].name} age={personsState.persons[2].age}  />
         <button onClick={switchNameHandler}>Switch Name</button>
         <a
           className="App-link"
