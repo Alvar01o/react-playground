@@ -19,13 +19,21 @@ const [ personsState , setPersonsState ] = useState({
 
 
 
-  const nameChangeHandler = (event) => {
+  const nameChangeHandler = (event , id) => {
+    const personIndex = personsState.persons.findIndex(p=>{
+      return p.id === id 
+    })
+    const person = {
+      ...personsState.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...personsState.persons];
+    persons[personIndex] = person;
+
     setPersonsState({
-      persons: [
-        {id:'1', name: event.target.value, age: 23 },
-        {id:'2', name: 'Alvaro', age: 22 },
-        {id:'3', name: 'Stephanie', age: 21 }
-      ],
+      persons: persons,
       showPersons: personsState.showPersons
     })
   }
@@ -56,7 +64,7 @@ const [ personsState , setPersonsState ] = useState({
               click={() => deletePersonHandler(index)}
               name={person.name} 
               age={person.age} 
-              changed={nameChangeHandler}
+              changed={(event)=> nameChangeHandler(event , person.id)}
               key={person.id}
               />
 
