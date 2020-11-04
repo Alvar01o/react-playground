@@ -5,43 +5,66 @@ import Person  from './Person/Person.js'
 
 
 
+
 function App() {
 
 const [ personsState , setPersonsState ] = useState({
   persons: [
-    { name: 'Max', age: 28 },
-    { name: 'Alvaro', age: 29 },
-    { name: 'Stephanie', age: 26 }
-  ]
+    {id:'1', name: 'Max', age: 28 },
+    {id:'2', name: 'Alvaro', age: 29 },
+    {id:'3', name: 'Stephanie', age: 26 }
+  ],
+  showPersons:false
 })
 
-  const switchNameHandler = () => {
-    setPersonsState({
-      persons: [
-        { name: 'Maximo', age: 23 },
-        { name: 'Alvaro', age: 22 },
-        { name: 'Stephanie', age: 21 }
-      ]
-    })
-  }
+
+
   const nameChangeHandler = (event) => {
     setPersonsState({
       persons: [
-        { name: event.target.value, age: 23 },
-        { name: 'Alvaro', age: 22 },
-        { name: 'Stephanie', age: 21 }
-      ]
+        {id:'1', name: event.target.value, age: 23 },
+        {id:'2', name: 'Alvaro', age: 22 },
+        {id:'3', name: 'Stephanie', age: 21 }
+      ],
+      showPersons: personsState.showPersons
     })
+  }
+
+  const togglePersonsHandler = () => {
+    const doesShow = personsState.showPersons;
+    setPersonsState({persons:personsState.persons,showPersons: !doesShow})
+  }
+
+  const deletePersonHandler = (index) => {
+//    const persons = personsState.persons.slice();
+    const persons = [...personsState.persons]
+    persons.splice(index , 1 )
+    setPersonsState({persons:persons, showPersons: personsState.showPersons})
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Person name={personsState.persons[0].name} age={personsState.persons[0].age} changed={nameChangeHandler}/>
-        <Person name={personsState.persons[1].name} age={personsState.persons[1].age} >My hobbies : Programming </Person> 
-        <Person name={personsState.persons[2].name} age={personsState.persons[2].age}  />
-        <button onClick={switchNameHandler}>Switch Name</button>
+        <button onClick={togglePersonsHandler}>Toggle Persons</button>        
+        { personsState.showPersons ? 
+          <div>
+            {
+            personsState.persons.map((person , index) => {
+
+              return <Person 
+              click={() => deletePersonHandler(index)}
+              name={person.name} 
+              age={person.age} 
+              changed={nameChangeHandler}
+              key={person.id}
+              />
+
+            })
+            }
+          </div> : null
+        }
+
         <a
           className="App-link"
           href="https://reactjs.org"
