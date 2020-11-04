@@ -49,29 +49,33 @@ const [ personsState , setPersonsState ] = useState({
     persons.splice(index , 1 )
     setPersonsState({persons:persons, showPersons: personsState.showPersons})
   }
+  let persons = null;
 
+  if(personsState.showPersons) {
+    persons = (
+      <div>
+      {
+      personsState.persons.map((person , index) => {
+
+        return <Person 
+        click={() => deletePersonHandler(index)}
+        name={person.name} 
+        age={person.age} 
+        changed={(event)=> nameChangeHandler(event , person.id)}
+        key={person.id}
+        />
+
+      })
+      }
+  </div>
+    )
+  }
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <button onClick={togglePersonsHandler}>Toggle Persons</button>        
-        { personsState.showPersons ? 
-          <div>
-            {
-            personsState.persons.map((person , index) => {
-
-              return <Person 
-              click={() => deletePersonHandler(index)}
-              name={person.name} 
-              age={person.age} 
-              changed={(event)=> nameChangeHandler(event , person.id)}
-              key={person.id}
-              />
-
-            })
-            }
-          </div> : null
-        }
+        {persons}
 
         <a
           className="App-link"
