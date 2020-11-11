@@ -70,9 +70,20 @@ const [ personsState , setPersonsState ] = useState({
   </div>
     )
   }
+
+  let classes = [] ; 
+  if(personsState.persons.length <= 2 ){
+    classes.push('red')
+  } 
+
+  if(personsState.persons.length <= 1 ){
+    classes.push('bold')
+  }   
+  classes = classes.join(" ")
   return (
     <div className="App">
       <header className="App-header">
+        <p className={classes}> Some text</p>
         <img src={logo} className="App-logo" alt="logo" />
         <button onClick={togglePersonsHandler}>Toggle Persons</button>        
         {persons}
