@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 import Person  from './Person/Person.js'
-
+import styled from 'styled-components'
 
 
 
@@ -80,11 +80,22 @@ const [ personsState , setPersonsState ] = useState({
     classes.push('bold')
   }   
   classes = classes.join(" ")
+
+  const StyledButton = styled.button`
+  color:black;
+  width:10%;
+  margin:10px;
+  &:hover {
+    color:white;
+    background-color:darkblue;
+  }
+  `
   return (
     <div className="App">
       <header className="App-header">
         <p className={classes}> Some text</p>
         <img src={logo} className="App-logo" alt="logo" />
+        <StyledButton onClick={togglePersonsHandler}>Styled button</StyledButton>
         <button onClick={togglePersonsHandler}>Toggle Persons</button>        
         {persons}
 
