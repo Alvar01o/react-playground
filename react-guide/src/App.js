@@ -1,9 +1,8 @@
-import logo from './logo.svg';
+
 import './App.css';
 import React, { useState } from 'react';
-import Person  from './Person/Person.js'
-import styled from 'styled-components'
-
+import Persons  from './components/Persons/Persons.js'
+import Cockpit  from './components/Cockpit/Cockpit.js'
 
 
 function App() {
@@ -43,7 +42,7 @@ const [ personsState , setPersonsState ] = useState({
     setPersonsState({persons:personsState.persons,showPersons: !doesShow})
   }
 
-  const deletePersonHandler = (index) => {
+  const deletePersonHandler = (index) => {  
 //    const persons = personsState.persons.slice();
     const persons = [...personsState.persons]
     persons.splice(index , 1 )
@@ -54,59 +53,17 @@ const [ personsState , setPersonsState ] = useState({
   if(personsState.showPersons) {
     persons = (
       <div>
-      {
-      personsState.persons.map((person , index) => {
-
-        return <Person 
-        click={() => deletePersonHandler(index)}
-        name={person.name} 
-        age={person.age} 
-        changed={(event)=> nameChangeHandler(event , person.id)}
-        key={person.id}
-        />
-
-      })
-      }
-  </div>
+        <Persons click={deletePersonHandler}  changed={nameChangeHandler} persons={personsState.persons}> </Persons>
+      </div>
     )
   }
 
-  let classes = [] ; 
-  if(personsState.persons.length <= 2 ){
-    classes.push('red')
-  } 
 
-  if(personsState.persons.length <= 1 ){
-    classes.push('bold')
-  }   
-  classes = classes.join(" ")
-
-  const StyledButton = styled.button`
-  color:black;
-  width:10%;
-  margin:10px;
-  &:hover {
-    color:white;
-    background-color:darkblue;
-  }
-  `
   return (
     <div className="App">
       <header className="App-header">
-        <p className={classes}> Some text</p>
-        <img src={logo} className="App-logo" alt="logo" />
-        <StyledButton onClick={togglePersonsHandler}>Styled button</StyledButton>
-        <button onClick={togglePersonsHandler}>Toggle Persons</button>        
+        <Cockpit click={togglePersonsHandler} persons={personsState.persons}></Cockpit>
         {persons}
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-
-        </a>
       </header>
     </div>
   );
